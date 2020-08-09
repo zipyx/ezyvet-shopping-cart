@@ -41,11 +41,11 @@ class ProductRepository implements IProductRepository {
                 $confirm = true;
             }
             else {
-                error_log("Error Log: addItem : validateProduct Failed.", 3, "error_logs.txt");
+                error_log("Error Log: addItem : validateProduct Failed.", 3, "error_log.txt");
             }
 
         } catch (Exception $exception) {
-            error_log("Error Log: addItem function --> ".$exception->getMessage(), 3, "error_logs.txt");
+            error_log("Error Log: addItem function --> ".$exception->getMessage(), 3, "error_log.txt");
         }
         return $confirm;
     }
@@ -56,7 +56,7 @@ class ProductRepository implements IProductRepository {
             unset($this->items[$productName]);
             $confirm = true;
         } catch (Exception $exception) {
-            error_log("Error Log: removeItem function --> ".$exception->getMessage(), 3, "error_logs.txt");
+            error_log("Error Log: removeItem function --> ".$exception->getMessage(), 3, "error_log.txt");
             return $confirm;
         }
         return $confirm;
