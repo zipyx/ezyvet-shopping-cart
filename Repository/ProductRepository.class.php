@@ -7,8 +7,7 @@ class ProductRepository implements IProductRepository {
 
     private $items = array();
 
-    public function __construct(array $items = array())
-    {
+    public function __construct(array $items = array()){
         $this->items = $items;
     }
 

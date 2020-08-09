@@ -13,12 +13,23 @@ if (isset($_SESSION["cart"])) {
 } else {
     $cartItems = array();
 }
-
 $result = false;
+
+
+// #############################################
+// $userCart = new ProductRepository($cartItems);
+// ##############################################
+
+// Comment lines below and uncomment line above to
+// remove 'mock' repository pattern.
+// #############################################
 $store = new ProductRepository($cartItems);
 $userCart = new ProductController($store);
+// #############################################
 
 
+// URL to include 'id' & 'action' & 'product name' (i.e - index.php?id=123&actionlink=example&product=clothes)
+// 'id' uses simple hash of product name.
 if (isset($_GET["id"]) && (isset($_GET["actionlink"])) && (isset($_GET["product"]))) {
 
     $productName = $_GET["product"];
@@ -44,6 +55,8 @@ if (isset($_GET["id"]) && (isset($_GET["actionlink"])) && (isset($_GET["product"
     if ($result) {
         $_SESSION['cart'] = $userCart->getItems();
     }
+
+    // comment line to view URL links
     header("location:" . $_SERVER['PHP_SELF']);
 
     // Used for debugging --> Hide Cart functionality
@@ -157,7 +170,7 @@ if (isset($_GET["id"]) && (isset($_GET["actionlink"])) && (isset($_GET["product"
     <div class="container-fluid py-3">
         <div class="row">
             <div class="col text-center">
-                <h5>GitHub <a href="https://github.com/zipyx" target="_NEW">Repository Here</h5>
+                <h5>GitHub <a href="https://github.com/zipyx/ezyvet-shopping-cart" target="_NEW">Repository Here</h5>
             </div>
         </div>
     </div>
