@@ -15,17 +15,18 @@ class ProductRepository implements IProductRepository {
         return $this->items ? $this->items : array();
     }
 
-    public function addItem($productName, $productPrice) : bool {
+    public function addItem($productName) : bool {
 
         $quantity = 1;
         $confirm = false;
+        $productPrice = static::getPrice($productName);
         
         try {
             
             if (@$this->items[$productName]) {
                 $quantity += $this->items[$productName]["quantity"];
             }
-            
+
             $productTotalCost = round($productPrice * $quantity, 2);
             $addToCart = array(
                 'name' => $productName, 
@@ -34,7 +35,7 @@ class ProductRepository implements IProductRepository {
                 'overall_unit_cost' => $productTotalCost,
             );
 
-            // mock validation against product table
+            // mock second validation against product table
             if (static::validateProductExists($addToCart)) {
                 $this->items[$productName] = $addToCart;
                 $confirm = true;
@@ -80,7 +81,7 @@ class ProductRepository implements IProductRepository {
         $this->items = Array();
     }
 
-    // mock validation check against existing product array table
+    // Mock validation check against existing product array table
     private static function validateProductExists(array $productToCheck) : bool {
         foreach($GLOBALS["products"] as $item) {
             if (in_array($productToCheck["name"], $item, TRUE)) {
@@ -88,6 +89,15 @@ class ProductRepository implements IProductRepository {
             }
         }
         return false;
+    }
+
+    // price check against product table
+    private static function getPrice($productName) : float {
+        foreach($GLOBALS["products"] as $item) {
+            if (in_array($productName, $item, TRUE)) {
+                return $item["price"];
+            }
+        }
     }
 
     // check cost value to ensure value is calculated accurately

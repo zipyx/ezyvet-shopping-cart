@@ -15,8 +15,8 @@ class ProductController {
         return $this->_unitOfWork->getItems();
     }
 
-    public function addItem($productName, $productPrice) : bool {
-        return $this->_unitOfWork->addItem($productName, $productPrice);
+    public function addItem($productName) : bool {
+        return $this->_unitOfWork->addItem($productName);
     }
 
     public function removeItem($productName) : bool {

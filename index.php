@@ -13,14 +13,13 @@ if (isset($_SESSION["cart"])) {
 } else {
     $cartItems = array();
 }
-$result = false;
 
 
 // #############################################
 // $userCart = new ProductRepository($cartItems);
 // ##############################################
 
-// Comment lines below and uncomment line above to
+// Comment the two lines below and uncomment line above to
 // remove 'mock' repository pattern.
 // #############################################
 $store = new ProductRepository($cartItems);
@@ -30,26 +29,21 @@ $userCart = new ProductController($store);
 
 // URL to include 'id' & 'action' & 'product name' (i.e - index.php?id=123&actionlink=example&product=clothes)
 // 'id' uses simple hash of product name.
+$result = false;
 if (isset($_GET["id"]) && (isset($_GET["actionlink"])) && (isset($_GET["product"]))) {
 
     $productName = $_GET["product"];
     switch ($_GET['actionlink']) {
         case 'addItem':
-            $productPrice = 0;
             foreach ($products as $product) {
                 if (in_array($productName, $product, TRUE)) {
-                    $productPrice = $product["price"];
+                    $result = $userCart->addItem($productName);
                     break;
                 }
-            }
-            if ($productPrice) {
-                $result = $userCart->addItem($productName, $productPrice);
             }
             break;
         case  'removeItem':
             $result = $userCart->removeItem($productName);
-            break;
-        default:
             break;
     }
     if ($result) {
