@@ -3,7 +3,7 @@
 Develop a basic shopping cart in PHP with provided supplied code and set of requirements.
 
 ## Live View Can be found here ##
-http://ezyvet.cervg.com
+https://ezyvet.cervg.com
 
 ### Please Note ###
 There are really only 3 files needed to run entire site. These files can be located in the following below.
